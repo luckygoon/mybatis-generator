@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.dao.FDishMapper">
+  <resultMap id="BaseResultMap" type="com.wechat.dao.pojo.FDish">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dish_name" jdbcType="VARCHAR" property="dishName" />
+    <result column="dish_price" jdbcType="REAL" property="dishPrice" />
+    <result column="dish_discount" jdbcType="REAL" property="dishDiscount" />
+    <result column="freq" jdbcType="INTEGER" property="freq" />
+    <result column="dish_image_url" jdbcType="VARCHAR" property="dishImageUrl" />
+    <result column="evaluate_id" jdbcType="INTEGER" property="evaluateId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dish_name, dish_price, dish_discount, freq, dish_image_url, evaluate_id
+  </sql>
+  <insert id="insertSelective" parameterType="com.wechat.dao.pojo.FDish">
+    insert into f_dish
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dishName != null">
+        dish_name,
+      </if>
+      <if test="dishPrice != null">
+        dish_price,
+      </if>
+      <if test="dishDiscount != null">
+        dish_discount,
+      </if>
+      <if test="freq != null">
+        freq,
+      </if>
+      <if test="dishImageUrl != null">
+        dish_image_url,
+      </if>
+      <if test="evaluateId != null">
+        evaluate_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dishName != null">
+        #{dishName,jdbcType=VARCHAR},
+      </if>
+      <if test="dishPrice != null">
+        #{dishPrice,jdbcType=REAL},
+      </if>
+      <if test="dishDiscount != null">
+        #{dishDiscount,jdbcType=REAL},
+      </if>
+      <if test="freq != null">
+        #{freq,jdbcType=INTEGER},
+      </if>
+      <if test="dishImageUrl != null">
+        #{dishImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateId != null">
+        #{evaluateId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.dao.pojo.FDish">
+    update f_dish
+    <set>
+      <if test="dishName != null">
+        dish_name = #{dishName,jdbcType=VARCHAR},
+      </if>
+      <if test="dishPrice != null">
+        dish_price = #{dishPrice,jdbcType=REAL},
+      </if>
+      <if test="dishDiscount != null">
+        dish_discount = #{dishDiscount,jdbcType=REAL},
+      </if>
+      <if test="freq != null">
+        freq = #{freq,jdbcType=INTEGER},
+      </if>
+      <if test="dishImageUrl != null">
+        dish_image_url = #{dishImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateId != null">
+        evaluate_id = #{evaluateId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from f_dish
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByCondition" parameterType="com.wechat.dao.pojo.FDish" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from f_dish
+    <if test="dishName != null">
+      where dish_name = #{dishName,jdbcType=VARCHAR}
+    </if>
+    <if test="dishPrice != null">
+        and dish_price = #{dishPrice,jdbcType=REAL}
+    </if>
+    <if test="dishDiscount != null">
+        and dish_discount = #{dishDiscount,jdbcType=REAL}
+    </if>
+    <if test="freq != null">
+        and freq = #{freq,jdbcType=INTEGER}
+    </if>
+    <if test="dishImageUrl != null">
+        and dish_image_url = #{dishImageUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="evaluateId != null">
+        and evaluate_id = #{evaluateId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from f_dish
+  </select>
+</mapper>
