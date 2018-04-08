@@ -1,7 +1,5 @@
 package org.mybatis.generator.codegen.mybatis3.xmlmapper.elements;
 
-import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
-
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.xml.Attribute;
@@ -10,58 +8,58 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.mybatis3.ListUtilities;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
 
-public class SelectByConditionElementGenerator extends
+import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
+
+public class DeleteBySelective extends
         AbstractXmlElementGenerator {
 
-    public SelectByConditionElementGenerator() {
+    public DeleteBySelective() {
         super();
     }
 
     @Override
     public void addElements(XmlElement parentElement) {
-        XmlElement answer = new XmlElement("select"); //$NON-NLS-1$
-//       添加select元素名称
+        XmlElement answer = new XmlElement("delete"); //$NON-NLS-1$
+//          添加select元素id名称(我们之前定义的枚举类名称)
         answer.addAttribute(new Attribute(
-                "id", introspectedTable.getSelectByConditionStatementId())); //$NON-NLS-1$
-        if (introspectedTable.getRules().generateResultMapWithBLOBs()) {
-            answer.addAttribute(new Attribute("resultMap", //$NON-NLS-1$
-                    introspectedTable.getResultMapWithBLOBsId()));
-        } else {
-            answer.addAttribute(new Attribute("resultMap", //$NON-NLS-1$
-                    introspectedTable.getBaseResultMapId()));
-        }
+                "id", introspectedTable.getDeleteBySelective())); //$NON-NLS-1$
 
-//        添加参数类型
+
+//
+////        参数名称自己酌情添加
+//        String parameterType;
+//        if (introspectedTable.getRules().generatePrimaryKeyClass()) {
+//            parameterType = introspectedTable.getPrimaryKeyType();
+//        } else {
+//            // PK fields are in the base class. If more than on PK
+//            // field, then they are coming in a map.
+//            if (introspectedTable.getPrimaryKeyColumns().size() > 1) {
+//                parameterType = "map"; //$NON-NLS-1$
+//            } else {
+//                parameterType = introspectedTable.getPrimaryKeyColumns().get(0)
+//                        .getFullyQualifiedJavaType().toString();
+//            }
+//        }
+//
+//        answer.addAttribute(new Attribute("parameterType", //$NON-NLS-1$
+//               parameterType));
+
+        //        添加参数类型
         FullyQualifiedJavaType parameterType = introspectedTable.getRules()
                 .calculateAllFieldsClass();
         answer.addAttribute(new Attribute("parameterType", //$NON-NLS-1$
                 parameterType.getFullyQualifiedName()));
 
+        context.getCommentGenerator().addComment(answer);
 
-//          添加xml sql语句
+
         StringBuilder sb = new StringBuilder();
-        sb.append("select "); //$NON-NLS-1$
-
-        if (stringHasValue(introspectedTable
-                .getSelectByPrimaryKeyQueryId())) {
-            sb.append('\'');
-            sb.append(introspectedTable.getSelectByPrimaryKeyQueryId());
-            sb.append("' as QUERYID,"); //$NON-NLS-1$
-        }
+        sb.append("delete from "); //$NON-NLS-1$
+        sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
         answer.addElement(new TextElement(sb.toString()));
-        answer.addElement(getBaseColumnListElement());
-        if (introspectedTable.hasBLOBColumns()) {
-            answer.addElement(new TextElement(",")); //$NON-NLS-1$
-            answer.addElement(getBlobColumnListElement());
-        }
 
-        sb.setLength(0);
-        sb.append("from "); //$NON-NLS-1$
+        XmlElement where = new XmlElement("where");
 
-        sb.append(introspectedTable
-                .getAliasedFullyQualifiedTableNameAtRuntime());
-        sb.append(" where 1 = 1 ");
-        answer.addElement(new TextElement(sb.toString()));
         for (IntrospectedColumn introspectedColumn : ListUtilities.removeIdentityAndGeneratedAlwaysColumns(introspectedTable
                 .getAllColumns())) {
             sb.setLength(0);
@@ -82,9 +80,9 @@ public class SelectByConditionElementGenerator extends
             conditionNotNullElement.addAttribute(new Attribute(
                     "test", ss.toString())); //$NON-NLS-1$
             conditionNotNullElement.addElement(new TextElement(sb.toString()));
-            answer.addElement(conditionNotNullElement);
+            where.addElement(conditionNotNullElement);
         }
-
+        answer.addElement(where);
         parentElement.addElement(answer);
     }
 }

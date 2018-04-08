@@ -2,12 +2,12 @@ package com.wechat.dao.pojo;
 
 import java.util.Date;
 
-public class FOrder {
+public class Order {
     private Integer id;
 
     private String uuid;
 
-    private Date dishedTime;
+    private Date createTime;
 
     private Integer deskId;
 
@@ -18,6 +18,18 @@ public class FOrder {
     private Float amountPaid;
 
     private Integer customers;
+
+    private Integer storeId;
+
+    private Integer finished;
+
+    private Integer isUrgent;
+
+    private Date createDay;
+
+    private String note;
+
+    private String uId;
 
     public Integer getId() {
         return id;
@@ -35,12 +47,12 @@ public class FOrder {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    public Date getDishedTime() {
-        return dishedTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setDishedTime(Date dishedTime) {
-        this.dishedTime = dishedTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getDeskId() {
@@ -81,5 +93,53 @@ public class FOrder {
 
     public void setCustomers(Integer customers) {
         this.customers = customers;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+    public Integer getFinished() {
+        return finished;
+    }
+
+    public void setFinished(Integer finished) {
+        this.finished = finished;
+    }
+
+    public Integer getIsUrgent() {
+        return isUrgent;
+    }
+
+    public void setIsUrgent(Integer isUrgent) {
+        this.isUrgent = isUrgent;
+    }
+
+    public Date getCreateDay() {
+        return createDay;
+    }
+
+    public void setCreateDay(Date createDay) {
+        this.createDay = createDay;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId == null ? null : uId.trim();
     }
 }

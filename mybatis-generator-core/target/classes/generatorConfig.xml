@@ -45,10 +45,11 @@
         </javaClientGenerator>
 
         <!-- 配置生成表 -->
-        <table tableName="f_user" enableCountByExample="false"
+        <table tableName="f_order" domainObjectName="Order" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
             <property name="modelOnly" value="false" />
+            <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 
     </context>

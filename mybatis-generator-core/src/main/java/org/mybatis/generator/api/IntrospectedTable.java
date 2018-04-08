@@ -98,6 +98,7 @@ public abstract class IntrospectedTable {
         ATTR_BLOB_COLUMN_LIST_ID,
         ATTR_MYBATIS3_UPDATE_BY_EXAMPLE_WHERE_CLAUSE_ID,
         ATTR_MYBATIS3_SQL_PROVIDER_TYPE,
+        ATTR_DELETE_BY_SELECTIVE, //根据条件删除
         ATTR_SELECT_BY_CONDITION_STATEMENT_ID, // 自定义通过条件查询SQL ID
         ATTR_SELECT_ALL // 查询所有(上面其实已经定义,此处用于示例) ID
 
@@ -158,6 +159,14 @@ public abstract class IntrospectedTable {
     public String getSelectByConditionStatementId() {
         return internalAttributes
                 .get(InternalAttribute.ATTR_SELECT_BY_CONDITION_STATEMENT_ID);
+    }
+     public void setDeleteBySelective(String s) {
+        internalAttributes.put(InternalAttribute.ATTR_DELETE_BY_SELECTIVE, s);
+    }
+
+    public String getDeleteBySelective() {
+        return internalAttributes
+                .get(InternalAttribute.ATTR_DELETE_BY_SELECTIVE);
     }
 
     //    自定义的语句ID的getset
@@ -580,6 +589,7 @@ public abstract class IntrospectedTable {
         //自定义
         setSelectByConditionStatementId("selectByCondition");
         setSelectAll("selectAll");
+        setDeleteBySelective("deleteBySelective");
     }
 
     public void setBlobColumnListId(String s) {

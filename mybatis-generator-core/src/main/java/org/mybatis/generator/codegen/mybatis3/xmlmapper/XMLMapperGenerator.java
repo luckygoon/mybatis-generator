@@ -42,6 +42,12 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
     }
+    protected void addDeleteBySelective(XmlElement parentElement) {
+        if (introspectedTable.getRules().generateSelectByPrimaryKey()) {
+            AbstractXmlElementGenerator elementGenerator = new DeleteBySelective();
+            initializeAndExecuteGenerator(elementGenerator, parentElement);
+        }
+    }
 //    自定义
     protected void addSelectAllElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateSelectByPrimaryKey()) {
@@ -81,14 +87,20 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
 //        addUpdateByPrimaryKeySelectiveElement(answer);
 //        addUpdateByPrimaryKeyWithBLOBsElement(answer);
 //        addUpdateByPrimaryKeyWithoutBLOBsElement(answer);
-
+        XmlElement cacheXML = new XmlElement("cache");
+        cacheXML.addAttribute(new Attribute("type","org.mybatis.caches.ehcache.LoggingEhcache"));
+        answer.addElement(cacheXML);
         addResultMapWithoutBLOBsElement(answer);
+        addResultMapWithBLOBsElement(answer);
         addBaseColumnListElement(answer);
+        addBlobColumnListElement(answer);
+        addSelectByPrimaryKeyElement(answer);
         addInsertSelectiveElement(answer);
         addUpdateByPrimaryKeySelectiveElement(answer);
         addDeleteByPrimaryKeyElement(answer);
         addSelectByConditionElement(answer); // 增加自定义SQL
         addSelectAllElement(answer);
+        addDeleteBySelective(answer);
         return answer;
     }
 
@@ -145,6 +157,7 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
     }
+
 
     protected void addSelectByExampleWithBLOBsElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateSelectByExampleWithBLOBs()) {
