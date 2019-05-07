@@ -31,8 +31,8 @@ import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseProblemException;
+//import com.github.javaparser.JavaParser;
+//import com.github.javaparser.ParseProblemException;
 
 @RunWith(Parameterized.class)
 public class JavaCodeGenerationTest {
@@ -43,16 +43,16 @@ public class JavaCodeGenerationTest {
         this.generatedJavaFile = generatedJavaFile;
     }
 
-    @Test
-    public void testJavaParse() {
-        ByteArrayInputStream is = new ByteArrayInputStream(
-                generatedJavaFile.getCompilationUnit().getFormattedContent().getBytes());
-        try {
-            JavaParser.parse(is);
-        } catch (ParseProblemException e) {
-            fail("Generated Java File " + generatedJavaFile.getFileName() + " will not compile");
-        }
-    }
+//    @Test
+//    public void testJavaParse() {
+//        ByteArrayInputStream is = new ByteArrayInputStream(
+//                generatedJavaFile.getCompilationUnit().getFormattedContent().getBytes());
+//        try {
+//            JavaParser.parse(is);
+//        } catch (ParseProblemException e) {
+//            fail("Generated Java File " + generatedJavaFile.getFileName() + " will not compile");
+//        }
+//    }
 
     @Parameters
     public static List<GeneratedJavaFile> generateJavaFiles() throws Exception {

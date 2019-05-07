@@ -5,20 +5,25 @@
 <generatorConfiguration>
 
     <!-- 数据库驱动 -->
-    <classPathEntry location="D:\Github\mybatis-generator\mybatis-generator-core\src\lib\mysql-connector-java-5.1.24.jar" />
+    <classPathEntry location="/Users/apple/Desktop/java-project/mybatis-generator/mybatis-generator-core/src/lib/mysql-connector-java-5.1.24.jar" />
 
     <context id="MySQLTables" targetRuntime="MyBatis3">
 
-        <commentGenerator>
-            <property name="suppressDate" value="true" />
-            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressAllComments" value="true" />
+        <!-- 使用自定义的插件 -->
+        <plugin type="org.mybatis.generator.plugins.LombokPlugin"></plugin>
+
+<!--        <commentGenerator>-->
+<!--            <property name="suppressDate" value="true" />-->
+<!--            &lt;!&ndash; 是否去除自动生成的注释 true：是 ： false:否 &ndash;&gt;-->
+<!--            <property name="suppressAllComments" value="true" />-->
+<!--        </commentGenerator>-->
+        <commentGenerator type="org.mybatis.generator.codegen.MyCommentGenerator">
         </commentGenerator>
 
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/xdcms" userId="root"
-                        password="root">
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/group" userId="root"
+                        password="123456">
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -26,32 +31,108 @@
         </javaTypeResolver>
 
         <!-- 生成模型的包名和位置 -->
-        <javaModelGenerator targetPackage="com.wechat.dao.pojo"
-                            targetProject="project">
+        <javaModelGenerator targetPackage="com.group.db.group.model"
+                            targetProject="/Users/apple/Desktop/java-project/group/groupdbmodle/src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- 生成映射文件的包名和位置 -->
-        <sqlMapGenerator targetPackage="com.wechat.dao.xml"
-                         targetProject="project">
+        <sqlMapGenerator targetPackage="com.group.db.group.xml"
+                         targetProject="/Users/apple/Desktop/java-project/group/groupdbmodle/src/main/java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- 生成DAO的包名和位置 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.wechat.dao" targetProject="project">
+                             targetPackage="com.group.db.group.mapper" targetProject="/Users/apple/Desktop/java-project/group/groupdbmodle/src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
         <!-- 配置生成表 -->
-        <table tableName="f_order" domainObjectName="Order" enableCountByExample="false"
+<!--        <table tableName="f_order" domainObjectName="Order" enableCountByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               enableUpdateByExample="false">-->
+<!--            <property name="modelOnly" value="false" />-->
+<!--            <generatedKey column="id" sqlStatement="JDBC"/>-->
+<!--        </table>-->
+
+        <table tableName="goods" domainObjectName="Goods"
+               enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="modelOnly" value="false" />
-            <generatedKey column="id" sqlStatement="JDBC"/>
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
         </table>
 
+        <table tableName="groupon" domainObjectName="Groupon"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table tableName="groupon_team" domainObjectName="GrouponTeam"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="order_detail" domainObjectName="OrderDetail"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table tableName="order_master" domainObjectName="OrderMaster"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table tableName="product" domainObjectName="Product"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="sys_log" domainObjectName="SysLog"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="sys_captcha" domainObjectName="SysCaptcha"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="specification" domainObjectName="Specification"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="sn" domainObjectName="Sn"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="user" domainObjectName="User"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="sys_oss" domainObjectName="SysOss"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
     </context>
 
-</generatorConfiguration>   
+</generatorConfiguration>

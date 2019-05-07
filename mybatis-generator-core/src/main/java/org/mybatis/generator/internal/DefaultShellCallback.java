@@ -44,6 +44,15 @@ public class DefaultShellCallback implements ShellCallback {
         this.overwrite = overwrite;
     }
 
+
+//    public static void main(String[] args) {
+//        String str = "/Users/apple/Desktop/java-project/mybatis-generator/project/com/group/db/group/model/Goods.java";
+//        File file = new File(str);
+//        if (file.exists()){
+//            System.out.println("11");
+//        }
+//    }
+
     /* (non-Javadoc)
      * @see org.mybatis.generator.api.ShellCallback#getDirectory(java.lang.String, java.lang.String)
      */
@@ -58,7 +67,11 @@ public class DefaultShellCallback implements ShellCallback {
         // if it does not already exist
 
         File project = new File(targetProject);
-        if (!project.isDirectory()) {
+        File real = new File(String.valueOf(project.getAbsoluteFile()));
+        if (!real.getParentFile().exists()) {
+            real.getParentFile().mkdirs();
+        }
+        if (!real.isDirectory()) {
             throw new ShellException(getString("Warning.9", //$NON-NLS-1$
                     targetProject));
         }
@@ -70,7 +83,7 @@ public class DefaultShellCallback implements ShellCallback {
             sb.append(File.separatorChar);
         }
 
-        File directory = new File(project, sb.toString());
+        File directory = new File(real, sb.toString());
         if (!directory.isDirectory()) {
             boolean rc = directory.mkdirs();
             if (!rc) {

@@ -490,6 +490,7 @@ public class Context extends PropertyHolder {
         return steps;
     }
 
+    //生成文件
     public void generateFiles(ProgressCallback callback,
             List<GeneratedJavaFile> generatedJavaFiles,
             List<GeneratedXmlFile> generatedXmlFiles, List<String> warnings)

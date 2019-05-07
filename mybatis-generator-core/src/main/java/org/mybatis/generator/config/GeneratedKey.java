@@ -111,6 +111,7 @@ public class GeneratedKey {
         return xmlElement;
     }
 
+
     public void validate(List<String> errors, String tableName) {
         if (!stringHasValue(runtimeSqlStatement)) {
             errors.add(getString("ValidationError.7", //$NON-NLS-1$

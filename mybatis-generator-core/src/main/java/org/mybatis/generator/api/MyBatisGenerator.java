@@ -338,6 +338,7 @@ public class MyBatisGenerator {
         try {
             File directory = shellCallback.getDirectory(gxf
                     .getTargetProject(), gxf.getTargetPackage());
+
             targetFile = new File(directory, gxf.getFileName());
             if (targetFile.exists()) {
                 if (gxf.isMergeable()) {

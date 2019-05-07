@@ -168,6 +168,7 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
         abstractGenerator.setWarnings(warnings);
     }
 
+    //生成java文件
     @Override
     public List<GeneratedJavaFile> getGeneratedJavaFiles() {
         List<GeneratedJavaFile> answer = new ArrayList<GeneratedJavaFile>();
