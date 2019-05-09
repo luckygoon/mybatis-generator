@@ -31,21 +31,21 @@
         </javaTypeResolver>
 
         <!-- 生成模型的包名和位置 -->
-        <javaModelGenerator targetPackage="com.group.db.group.model"
+        <javaModelGenerator targetPackage="com.group.db.group.model.auto"
                             targetProject="/Users/apple/Desktop/java-project/group/groupdbmodle/src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- 生成映射文件的包名和位置 -->
-        <sqlMapGenerator targetPackage="com.group.db.group.xml"
+        <sqlMapGenerator targetPackage="com.group.db.group.mapperxml.auto"
                          targetProject="/Users/apple/Desktop/java-project/group/groupdbmodle/src/main/java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- 生成DAO的包名和位置 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.group.db.group.mapper" targetProject="/Users/apple/Desktop/java-project/group/groupdbmodle/src/main/java">
+                             targetPackage="com.group.db.group.mapper.auto" targetProject="/Users/apple/Desktop/java-project/group/groupdbmodle/src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
@@ -133,6 +133,36 @@
                selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
+
+        <table tableName="shopsj" domainObjectName="ShopSj"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+
+        <table tableName="label" domainObjectName="Label"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table tableName="goods_big_param" domainObjectName="GoodsBigParam"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table tableName="activity_summary" domainObjectName="ActivitySummary"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
     </context>
 
 </generatorConfiguration>
